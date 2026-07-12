@@ -1,39 +1,15 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "public/**",
-      "use": "@vercel/static"
-    }
+  "buildCommand": "npm install",
+  "outputDirectory": "public",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/$1" }
   ],
-  "routes": [
+  "headers": [
     {
-      "src": "/css/(.*)",
-      "dest": "public/css/$1"
-    },
-    {
-      "src": "/js/(.*)",
-      "dest": "public/js/$1"
-    },
-    {
-      "src": "/workbench.html",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/subtitle.html",
-      "dest": "public/subtitle.html"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "server.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "public/$1"
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache" }
+      ]
     }
   ]
 }
